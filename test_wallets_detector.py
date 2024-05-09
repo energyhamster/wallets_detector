@@ -46,7 +46,10 @@ def login_to_dune(driver, login, password):
     driver.find_element(By.NAME, 'password').send_keys(password)
     driver.find_element(By.XPATH, "//button[@type='submit']").click()
 
+
 wallet_counter = 1
+
+
 def check_token_wallets(driver, token):
     global today_wallet_created, yesterday_wallet_created, wallet_counter
     try:
@@ -64,9 +67,9 @@ def check_token_wallets(driver, token):
         difference = int(today_wallet_created) - int(yesterday_wallet_created)
         logging.info(f"Token: {token}, Wallet Difference: {difference}")
 
-        wallet_created_raise = int(today_wallet_created) > int(yesterday_wallet_created) * 3
+        wallet_created_raise = int(today_wallet_created) > int(yesterday_wallet_created) * 2
 
-        if wallet_created_raise and difference > 300:
+        if wallet_created_raise and difference >= 100:
             logging.info(f"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! BUY ALERT for Token: {token}")
             logging.info(f"Difference: {difference}")
             logging.info(f"Today wallets created: {today_wallet_created}")
@@ -79,7 +82,7 @@ def check_token_wallets(driver, token):
         else:
             logging.info(f"Token {token} does not meet the criteria")
         time.sleep(1)
-        print(x)
+        print(wallet_counter)
         wallet_counter += 1
         pg.click(495, 468)
 
@@ -93,13 +96,13 @@ def check_token_wallets(driver, token):
 
 # Main execution with context manager for safety and clean shutdown
 opts = uc.ChromeOptions()
-uc.TARGET_VERSION = 85  # This is the targeted Chrome version
+# uc.TARGET_VERSION = 85  # This is the targeted Chrome version
 with get_driver(opts) as driver:
-    driver.implicitly_wait(120)
-
+    driver.implicitly_wait(60)
+    opts.add_argument("--window-size=1900,2000")
     login_to_dune(driver, login, password)
 
-    with open('token_list.txt', 'r') as file:
+    with open('tokens_win.txt', 'r') as file:
         token_list = file.readlines()
         for token in token_list:
             token = token.strip()

@@ -1,0 +1,4 @@
+name: Wallets Detector
+
+on:
+  push
