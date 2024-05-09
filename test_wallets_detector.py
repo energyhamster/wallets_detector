@@ -67,9 +67,11 @@ def check_token_wallets(driver, token):
         difference = int(today_wallet_created) - int(yesterday_wallet_created)
         logging.info(f"Token: {token}, Wallet Difference: {difference}")
 
-        wallet_created_raise = int(today_wallet_created) > int(yesterday_wallet_created) * 2
+        #wallet_created_raise = int(today_wallet_created) > int(yesterday_wallet_created) * 2
+        wallet_created_raise = True
 
-        if wallet_created_raise and difference >= 100:
+        #if wallet_created_raise and difference >= 100:
+        if wallet_created_raise:
             logging.info(f"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! BUY ALERT for Token: {token}")
             logging.info(f"Difference: {difference}")
             logging.info(f"Today wallets created: {today_wallet_created}")
@@ -98,7 +100,7 @@ def check_token_wallets(driver, token):
 opts = uc.ChromeOptions()
 # uc.TARGET_VERSION = 85  # This is the targeted Chrome version
 with get_driver(opts) as driver:
-    driver.implicitly_wait(60)
+    driver.implicitly_wait(160)
     opts.add_argument("--window-size=1900,2000")
     login_to_dune(driver, login, password)
 
