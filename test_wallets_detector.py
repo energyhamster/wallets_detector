@@ -67,11 +67,9 @@ def test_check_token_wallets(driver, token):
         difference = int(today_wallet_created) - int(yesterday_wallet_created)
         logging.info(f"Token: {token}, Wallet Difference: {difference}")
 
-        #wallet_created_raise = int(today_wallet_created) > int(yesterday_wallet_created) * 2
-        wallet_created_raise = True
+        wallet_created_raise = int(today_wallet_created) > int(yesterday_wallet_created) * 2
 
-        #if wallet_created_raise and difference >= 100:
-        if wallet_created_raise:
+        if wallet_created_raise and difference >= 100:
             logging.info(f"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! BUY ALERT for Token: {token}")
             logging.info(f"Difference: {difference}")
             logging.info(f"Today wallets created: {today_wallet_created}")
@@ -104,7 +102,7 @@ with get_driver(opts) as driver:
     opts.add_argument("--window-size=1900,2000")
     login_to_dune(driver, login, password)
 
-    with open('tokens_test.txt', 'r') as file:
+    with open('tokens_win.txt', 'r') as file:
         token_list = file.readlines()
         for token in token_list:
             token = token.strip()
