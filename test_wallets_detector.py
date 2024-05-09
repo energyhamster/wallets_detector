@@ -2,7 +2,7 @@ import os
 import logging
 import telebot
 import time
-import pyautogui as pg
+# import pyautogui as pg
 from contextlib import contextmanager
 import undetected_chromedriver as uc
 from selenium.webdriver.common.by import By
@@ -84,7 +84,7 @@ def check_token_wallets(driver, token):
         time.sleep(1)
         print(wallet_counter)
         wallet_counter += 1
-        pg.click(495, 468)
+        # pg.click(495, 468)
 
     except TimeoutException as e:
         logging.error(f"Timeout for token {token}: {e}")
