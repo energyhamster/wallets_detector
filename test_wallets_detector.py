@@ -104,7 +104,7 @@ with get_driver(opts) as driver:
     opts.add_argument("--window-size=1900,2000")
     login_to_dune(driver, login, password)
 
-    with open('tokens_win.txt', 'r') as file:
+    with open('tokens_test.txt', 'r') as file:
         token_list = file.readlines()
         for token in token_list:
             token = token.strip()
