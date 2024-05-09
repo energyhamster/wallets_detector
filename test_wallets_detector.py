@@ -108,6 +108,6 @@ with get_driver(opts) as driver:
         token_list = file.readlines()
         for token in token_list:
             token = token.strip()
-            check_token_wallets(driver, token)
+            test_check_token_wallets(driver, token)
 
     time.sleep(3)
