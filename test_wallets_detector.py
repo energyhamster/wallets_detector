@@ -50,7 +50,7 @@ def login_to_dune(driver, login, password):
 wallet_counter = 1
 
 
-def test_check_token_wallets(driver, token):
+def check_token_wallets(driver, token):
     global today_wallet_created, yesterday_wallet_created, wallet_counter
     try:
         driver.get(
@@ -108,6 +108,6 @@ with get_driver(opts) as driver:
         token_list = file.readlines()
         for token in token_list:
             token = token.strip()
-            test_check_token_wallets(driver, token)
+            check_token_wallets(driver, token)
 
     time.sleep(3)
