@@ -2,3 +2,5 @@ name: Wallets Detector
 
 on:
   push
+
+jobs:
