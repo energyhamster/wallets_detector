@@ -30,13 +30,13 @@ def send_telegram_message(message_text):
     bot.send_message(chat_id, message_text, parse_mode='html')
 
 
-@contextmanager
-def get_driver(options):
-    driver = uc.Chrome(options=options)
-    try:
-        yield driver
-    finally:
-        driver.quit()
+# @contextmanager
+# def get_driver(options):
+#     driver = uc.Chrome(options=options)
+#     try:
+#         yield driver
+#     finally:
+#         driver.quit()
 
 
 def login_to_dune(driver, login, password):
@@ -50,7 +50,7 @@ def login_to_dune(driver, login, password):
 wallet_counter = 1
 
 
-def test_check_token_wallets(driver, token):
+def check_token_wallets(driver, token):
     global today_wallet_created, yesterday_wallet_created, wallet_counter
     try:
         driver.get(
@@ -95,17 +95,15 @@ def test_check_token_wallets(driver, token):
 
 
 # Main execution with context manager for safety and clean shutdown
-opts = uc.ChromeOptions()
+# opts = uc.ChromeOptions()
 # uc.TARGET_VERSION = 85  # This is the targeted Chrome version
-with get_driver(opts) as driver:
-    driver.implicitly_wait(160)
-    opts.add_argument("--window-size=1900,2000")
+def test_get_wallets(driver):
     login_to_dune(driver, login, password)
 
-    with open('tokens_win.txt', 'r') as file:
+    with open('tokens_test.txt', 'r') as file:
         token_list = file.readlines()
         for token in token_list:
             token = token.strip()
-            test_check_token_wallets(driver, token)
+            check_token_wallets(driver, token)
 
     time.sleep(3)
