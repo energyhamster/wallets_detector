@@ -100,7 +100,7 @@ def check_token_wallets(driver, token):
 def test_get_wallets(driver):
     login_to_dune(driver, login, password)
 
-    with open('tokens_test.txt', 'r') as file:
+    with open('tokens_win.txt', 'r') as file:
         token_list = file.readlines()
         for token in token_list:
             token = token.strip()
