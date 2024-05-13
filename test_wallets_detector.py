@@ -30,15 +30,6 @@ def send_telegram_message(message_text):
     bot.send_message(chat_id, message_text, parse_mode='html')
 
 
-# @contextmanager
-# def get_driver(options):
-#     driver = uc.Chrome(options=options)
-#     try:
-#         yield driver
-#     finally:
-#         driver.quit()
-
-
 def login_to_dune(driver, login, password):
     driver.get('https://dune.com/browse/dashboards')
     driver.find_element(By.LINK_TEXT, 'Sign in').click()
@@ -100,7 +91,7 @@ def check_token_wallets(driver, token):
 def test_get_wallets(driver):
     login_to_dune(driver, login, password)
 
-    with open('tokens_win.txt', 'r') as file:
+    with open('binance.txt', 'r') as file:
         token_list = file.readlines()
         for token in token_list:
             token = token.strip()
