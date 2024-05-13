@@ -97,7 +97,7 @@ def read_tokens_from_file(file_path):
     return tokens
 
 
-@pytest.mark.parametrize("token", read_tokens_from_file('tokens_test.txt'))
+@pytest.mark.parametrize("token", read_tokens_from_file('binance.txt'))
 def test_get_wallets(driver, token):
     login_to_dune(driver, login, password)
     check_token_wallets(driver, token)
