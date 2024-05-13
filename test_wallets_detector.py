@@ -21,7 +21,8 @@ password = '4617aaeE5'
 
 # Telegram bot ID's
 bot_token = '5571166427:AAHmG8cSK4MLtbhvrDLjT3qo3UpGGfhsIKA'
-chat_id = '-1001915065412'
+#chat_id = '-1001915065412'
+chat_id = '-1002135761277'
 
 bot = telebot.TeleBot(bot_token)
 
