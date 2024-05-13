@@ -1,6 +1,9 @@
 import pytest
 import undetected_chromedriver as uc
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.by import By
+import time
+
 
 @pytest.fixture()
 def driver():

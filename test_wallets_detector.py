@@ -2,6 +2,7 @@ import os
 import logging
 import telebot
 import time
+import pytest
 # import pyautogui as pg
 from contextlib import contextmanager
 import undetected_chromedriver as uc
@@ -21,7 +22,7 @@ password = '4617aaeE5'
 
 # Telegram bot ID's
 bot_token = '5571166427:AAHmG8cSK4MLtbhvrDLjT3qo3UpGGfhsIKA'
-#chat_id = '-1001915065412'
+# chat_id = '-1001915065412'
 chat_id = '-1002135761277'
 
 bot = telebot.TeleBot(bot_token)
@@ -67,7 +68,7 @@ def check_token_wallets(driver, token):
             logging.info(f"Today wallets created: {today_wallet_created}")
             logging.info(f"Yesterday wallets created: {yesterday_wallet_created}")
 
-            send_telegram_message(f"BUY ALERT for Token: {token}\n"
+            send_telegram_message(f"BUY SIGNAL ALERT for Token: {token}\n"
                                   f"Difference: {difference}\n"
                                   f"Today wallets created: {today_wallet_created}\n"
                                   f"Yesterday wallets created: {yesterday_wallet_created}\n")
@@ -89,13 +90,15 @@ def check_token_wallets(driver, token):
 # Main execution with context manager for safety and clean shutdown
 # opts = uc.ChromeOptions()
 # uc.TARGET_VERSION = 85  # This is the targeted Chrome version
-def test_get_wallets(driver):
+
+def read_tokens_from_file(file_path):
+    with open(file_path, 'r') as file:
+        tokens = [line.strip() for line in file if line.strip()]
+    return tokens
+
+
+@pytest.mark.parametrize("token", read_tokens_from_file('binance.txt'))
+def test_get_wallets(driver, token):
     login_to_dune(driver, login, password)
-
-    with open('binance.txt', 'r') as file:
-        token_list = file.readlines()
-        for token in token_list:
-            token = token.strip()
-            check_token_wallets(driver, token)
-
-    time.sleep(3)
+    check_token_wallets(driver, token)
+    time.sleep(1)
