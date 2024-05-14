@@ -3,7 +3,6 @@ import logging
 import telebot
 import time
 import pytest
-# import pyautogui as pg
 from contextlib import contextmanager
 import undetected_chromedriver as uc
 from selenium.webdriver.common.by import By
@@ -30,14 +29,6 @@ bot = telebot.TeleBot(bot_token)
 
 def send_telegram_message(message_text):
     bot.send_message(chat_id, message_text, parse_mode='html')
-
-
-def login_to_dune(driver, login, password):
-    driver.get('https://dune.com/browse/dashboards')
-    driver.find_element(By.LINK_TEXT, 'Sign in').click()
-    driver.find_element(By.NAME, 'username').send_keys(login)
-    driver.find_element(By.NAME, 'password').send_keys(password)
-    driver.find_element(By.XPATH, "//button[@type='submit']").click()
 
 
 wallet_counter = 1
@@ -87,10 +78,6 @@ def check_token_wallets(driver, token):
         logging.error(f"Unexpected error for token {token}: {e}")
 
 
-# Main execution with context manager for safety and clean shutdown
-# opts = uc.ChromeOptions()
-# uc.TARGET_VERSION = 85  # This is the targeted Chrome version
-
 def read_tokens_from_file(file_path):
     with open(file_path, 'r') as file:
         tokens = [line.strip() for line in file if line.strip()]
@@ -99,6 +86,5 @@ def read_tokens_from_file(file_path):
 
 @pytest.mark.parametrize("token", read_tokens_from_file('binance.txt'))
 def test_get_wallets(driver, token):
-    login_to_dune(driver, login, password)
     check_token_wallets(driver, token)
     time.sleep(1)
