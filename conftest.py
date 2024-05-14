@@ -4,6 +4,7 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 import time
 
+# Credentials for Dune Account
 login = 'energy_hamster'
 password = '4617aaeE5'
 

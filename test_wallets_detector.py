@@ -15,10 +15,6 @@ logging.basicConfig(
     format='%(asctime)s - %(levelname)s - %(message)s'
 )
 
-# Credentials for Dune Account
-login = 'energy_hamster'
-password = '4617aaeE5'
-
 # Telegram bot ID's
 bot_token = '5571166427:AAHmG8cSK4MLtbhvrDLjT3qo3UpGGfhsIKA'
 # chat_id = '-1001915065412'
