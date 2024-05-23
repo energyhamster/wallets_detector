@@ -6,7 +6,7 @@ import time
 
 # Credentials for Dune Account
 login = 'energy_hamster'
-password = '4617aaeE5'
+password = 'Qwerty12345'
 
 
 def login_to_dune(driver, login, password):
