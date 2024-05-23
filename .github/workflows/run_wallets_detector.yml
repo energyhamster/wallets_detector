@@ -1,8 +1,7 @@
 name: Wallets Detector
 
 on:
-  schedule:
-    - cron: "0 4 * * *"
+  push
 
 jobs:
   test:
