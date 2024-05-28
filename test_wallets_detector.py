@@ -34,7 +34,7 @@ def check_token_wallets(driver, token):
     global today_wallet_created, yesterday_wallet_created, wallet_counter
     try:
         driver.get(
-            f'https://dune.com/queries/1897591/3123566?chain_e15077=ethereum&day_n26d66=15&token_address_t6c1ea={token}')
+            f'https://dune.com/queries/1897591/3123566?chain_e15077=ethereum&day_n26d66=2&token_address_t6c1ea={token}')
         time.sleep(1)
         driver.find_element(By.ID, 'run-query-button').click()
         time.sleep(1)
