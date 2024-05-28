@@ -55,7 +55,7 @@ def check_token_wallets(driver, token):
             logging.info(f"Today wallets created: {today_wallet_created}")
             logging.info(f"Yesterday wallets created: {yesterday_wallet_created}")
 
-            send_telegram_message(f"BUY SIGNAL ALERT for Token: {token} https://dexscreener.com/ethereum/{token}\n"
+            send_telegram_message(f"BUY SIGNAL ALERT for Token: https://dexscreener.com/ethereum/{token}\n"
                                   f"Difference: {difference}\n"
                                   f"Today wallets created: {today_wallet_created}\n"
                                   f"Yesterday wallets created: {yesterday_wallet_created}\n")
