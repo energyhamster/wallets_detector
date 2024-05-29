@@ -30,7 +30,7 @@ def send_telegram_message(message_text):
 wallet_counter = 1
 
 
-def check_token_wallets(driver, token):
+def check_token_wallets(driver, token, exchange):
     global today_wallet_created, yesterday_wallet_created, wallet_counter
     try:
         driver.get(
@@ -50,28 +50,29 @@ def check_token_wallets(driver, token):
         wallet_created_raise = int(today_wallet_created) > int(yesterday_wallet_created) * 2
 
         if wallet_created_raise and difference >= 100:
-            logging.info(f"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! BUY ALERT for Token: {token}")
+            logging.info(f"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! BUY ALERT for Token on {exchange}: {token}")
             logging.info(f"Difference: {difference}")
             logging.info(f"Today wallets created: {today_wallet_created}")
             logging.info(f"Yesterday wallets created: {yesterday_wallet_created}")
 
-            send_telegram_message(f"BUY SIGNAL ALERT for Token: https://dexscreener.com/ethereum/{token}\n"
-                                  f"Difference: {difference}\n"
-                                  f"Today wallets created: {today_wallet_created}\n"
-                                  f"Yesterday wallets created: {yesterday_wallet_created}\n")
+            send_telegram_message(
+                f"BUY SIGNAL ALERT for Token on {exchange}: https://dexscreener.com/ethereum/{token}\n"
+                f"Difference: {difference}\n"
+                f"Today wallets created: {today_wallet_created}\n"
+                f"Yesterday wallets created: {yesterday_wallet_created}\n")
         else:
-            logging.info(f"Token {token} does not meet the criteria")
+            logging.info(f"Token {token} does not meet the criteria on {exchange}")
         time.sleep(1)
         print(wallet_counter)
         wallet_counter += 1
         # pg.click(495, 468)
 
     except TimeoutException as e:
-        logging.error(f"Timeout for token {token}: {e}")
+        logging.error(f"Timeout for token {token} on {exchange}: {e}")
     except WebDriverException as e:
-        logging.error(f"WebDriver error for token {token}: {e}")
+        logging.error(f"WebDriver error for token {token} on {exchange}: {e}")
     except Exception as e:
-        logging.error(f"Unexpected error for token {token}: {e}")
+        logging.error(f"Unexpected error for token {token} on {exchange}: {e}")
 
 
 def read_tokens_from_file(file_path):
@@ -81,6 +82,6 @@ def read_tokens_from_file(file_path):
 
 
 @pytest.mark.parametrize("token", read_tokens_from_file('binance.txt'))
-def test_get_wallets(driver, token):
-    check_token_wallets(driver, token)
+def test_get_wallets_for_binance(driver, token):
+    check_token_wallets(driver, token, exchange="Binance")
     time.sleep(1)
