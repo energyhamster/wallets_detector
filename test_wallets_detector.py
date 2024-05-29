@@ -81,7 +81,7 @@ def read_tokens_from_file(file_path):
     return tokens
 
 
-@pytest.mark.parametrize("token", read_tokens_from_file('binance.txt'))
+@pytest.mark.parametrize("token", read_tokens_from_file('exchanges/binance.txt'))
 def test_get_wallets_for_binance(driver, token):
     check_token_wallets(driver, token, exchange="Binance")
     time.sleep(1)
